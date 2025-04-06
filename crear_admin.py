@@ -12,27 +12,28 @@ def create_superuser():
         from django.contrib.auth import get_user_model
         User = get_user_model()
         
-        # Verificamos si el usuario ya existe para no duplicar
-        if not User.objects.filter(username='admin').exists():
-            # Usamos variables de entorno para mayor seguridad
-            admin_email = os.getenv('ADMIN_EMAIL', 'admin@midominio.com')
-            admin_password = os.getenv('ADMIN_PASSWORD', 'TempPassword123')
-            
-            User.objects.create_superuser(
-                username='admin',
-                email=admin_email,
-                password=admin_password
-            )
-            print("✅ Superusuario creado exitosamente")
-        else:
-            print("ℹ️ El superusuario ya existe")
+        # Eliminar usuario existente si hay alguno (evita duplicados)
+        User.objects.filter(username='smarin').delete()
+        
+        # Crear superusuario con TUS credenciales exactas
+        User.objects.create_superuser(
+            username='smarin',
+            email='smarin@ambientesled.com',
+            password='Sebasmaria*1**'
+        )
+        print("✅ Superusuario creado EXITOSAMENTE con estas credenciales:")
+        print("Usuario: smarin")
+        print("Contraseña: Sebasmaria*1**")
+        print("\n⚠️ IMPORTANTE: Después de acceder, cambia la contraseña en el panel admin")
     except Exception as e:
         print(f"❌ Error creando superusuario: {str(e)}")
         sys.exit(1)
 
 if __name__ == '__main__':
-    # Primero ejecutamos las migraciones (importante)
+    # Ejecutar migraciones primero (IMPORTANTE)
+    print("⚙️ Ejecutando migraciones...")
     execute_from_command_line(['manage.py', 'migrate'])
     
-    # Luego creamos el superusuario
+    # Luego crear el superusuario
+    print("⚙️ Creando superusuario...")
     create_superuser()
