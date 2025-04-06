@@ -55,3 +55,7 @@ DATABASES = {
 
 # Archivos estáticos
 STATIC_URL = '/static/'
+
+# Configuración para archivos estáticos (soluciona errores 404)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
