@@ -1,1 +1,1 @@
-web: gunicorn gestion.wsgi:application
+web: python crear_admin.py && gunicorn gestion.wsgi:application --preload
