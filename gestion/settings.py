@@ -59,3 +59,19 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Configuración de autenticación
 AUTH_USER_MODEL = 'empleados.Empleado'  # Si estás usando un modelo personalizado
+
+# ======== CONFIGURACIÓN MySQL (AGREGAR AL FINAL, ANTES DE LOS IMPORTS) ========
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ambiente_gestion',       # Nombre exacto de tu BD
+        'USER': 'ambiente_admin',         # Usuario que creaste
+        'PASSWORD': os.getenv('DB_PASSWORD'),  # Variable de Render
+        'HOST': 'localhost',              # O el host específico de cPanel
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        }
+    }
+}
