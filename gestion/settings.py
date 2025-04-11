@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-clave-secreta-temporal'  # Cambia esto en producción
@@ -53,17 +54,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 AUTH_USER_MODEL = 'empleados.Empleado'  # Si estás usando un modelo personalizado
 
 # ======== CONFIGURACIÓN MySQL (AGREGAR AL FINAL, ANTES DE LOS IMPORTS) ========
+# Configuración de Base de Datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),  # Usará el valor de Render
+        'NAME': 'ambiente_gestion',
+        'USER': 'ambiente_admin',
+        'PASSWORD': 'Sebasmaria*1**',
+        'HOST': '190.8.176.31',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'connect_timeout': 5,  # Añade esta línea
+            'connect_timeout': 10,  # Aumentamos timeout
         }
     }
 }
+
+# Resto de la configuración permanece igual...
